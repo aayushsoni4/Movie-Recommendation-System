@@ -32,10 +32,38 @@ similarity = pickle.load(open("similarity.pkl", "rb"))
 
 st.title("Movie Recommendation System")
 
-selected_movie = st.selectbox("Select the movie you like", movies['title'].values)
+selected_movie = st.selectbox("Select the movie you like", tuple(movies['title'].values))
 
 if st.button('Recommend'):
     recommended_movies,posters,movies_id = recommend(selected_movie)
+
+    movie_idx = movies[movies['title']==selected_movie].index[0]
+    st.header(selected_movie)
+        
+    col1, col2 = st.columns(2)
+    with col1:
+        poster = fetch_poster(movies.iloc[movie_idx].id)
+        st.image(poster, width=350)
+    with col2:
+        response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=087c4d46a2f438619a5f3c6714775216&language=en-US'.format(movies.iloc[movie_idx].id))
+        data = response.json()
+        s = ""
+        st.write("***OVERVIEW***: ", data['overview'])
+        for i in data['genres']:
+            s+=i['name']+", "
+        st.write("***GENRES***: ", s[:-2])
+        st.write("***RELEASE DATE***: ", data['release_date'][8:]+'-'+data['release_date'][5:7]+'-'+data['release_date'][:4])
+        st.write("***RUNTIME***: ", data['runtime'], "mins")
+        s = ""
+        for i in data['spoken_languages']:
+            s+=i['english_name']+", "
+        st.write("***LANGUAGES***: ", s[:-2])
+        st.write("***RATING***: ", data['vote_average'], "/10")
+        st.write("***STATUS***: ", data['status'])            
+
+
+
+    st.header("Recommended Movies")
 
     tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8, tab9, tab10 = st.tabs(["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"])
 
@@ -44,7 +72,7 @@ if st.button('Recommend'):
         
         col1, col2 = st.columns(2)
         with col1:
-            st.image(posters[0])
+            st.image(posters[0], width=350)
         with col2:
             response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=087c4d46a2f438619a5f3c6714775216&language=en-US'.format(movies_id[0]))
             data = response.json()
@@ -67,7 +95,7 @@ if st.button('Recommend'):
         
         col1, col2 = st.columns(2)
         with col1:
-            st.image(posters[1])
+            st.image(posters[1], width=350)
         with col2:
             response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=087c4d46a2f438619a5f3c6714775216&language=en-US'.format(movies_id[1]))
             data = response.json()
@@ -90,7 +118,7 @@ if st.button('Recommend'):
         
         col1, col2 = st.columns(2)
         with col1:
-            st.image(posters[2])
+            st.image(posters[2], width=350)
         with col2:
             response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=087c4d46a2f438619a5f3c6714775216&language=en-US'.format(movies_id[2]))
             data = response.json()
@@ -113,7 +141,7 @@ if st.button('Recommend'):
         
         col1, col2 = st.columns(2)
         with col1:
-            st.image(posters[3])
+            st.image(posters[3], width=350)
         with col2:
             response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=087c4d46a2f438619a5f3c6714775216&language=en-US'.format(movies_id[3]))
             data = response.json()
@@ -136,7 +164,7 @@ if st.button('Recommend'):
         
         col1, col2 = st.columns(2)
         with col1:
-            st.image(posters[4])
+            st.image(posters[4], width=350)
         with col2:
             response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=087c4d46a2f438619a5f3c6714775216&language=en-US'.format(movies_id[4]))
             data = response.json()
@@ -159,7 +187,7 @@ if st.button('Recommend'):
         
         col1, col2 = st.columns(2)
         with col1:
-            st.image(posters[5])
+            st.image(posters[5], width=350)
         with col2:
             response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=087c4d46a2f438619a5f3c6714775216&language=en-US'.format(movies_id[5]))
             data = response.json()
@@ -182,7 +210,7 @@ if st.button('Recommend'):
         
         col1, col2 = st.columns(2)
         with col1:
-            st.image(posters[6])
+            st.image(posters[6], width=350)
         with col2:
             response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=087c4d46a2f438619a5f3c6714775216&language=en-US'.format(movies_id[6]))
             data = response.json()
@@ -205,7 +233,7 @@ if st.button('Recommend'):
         
         col1, col2 = st.columns(2)
         with col1:
-            st.image(posters[7])
+            st.image(posters[7], width=350)
         with col2:
             response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=087c4d46a2f438619a5f3c6714775216&language=en-US'.format(movies_id[7]))
             data = response.json()
@@ -228,7 +256,7 @@ if st.button('Recommend'):
         
         col1, col2 = st.columns(2)
         with col1:
-            st.image(posters[8])
+            st.image(posters[8], width=350)
         with col2:
             response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=087c4d46a2f438619a5f3c6714775216&language=en-US'.format(movies_id[8]))
             data = response.json()
@@ -251,7 +279,7 @@ if st.button('Recommend'):
         
         col1, col2 = st.columns(2)
         with col1:
-            st.image(posters[9])
+            st.image(posters[9], width=350)
         with col2:
             response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=087c4d46a2f438619a5f3c6714775216&language=en-US'.format(movies_id[9]))
             data = response.json()
