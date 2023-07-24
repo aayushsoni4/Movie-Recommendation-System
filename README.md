@@ -39,7 +39,7 @@ To run this project, you will need the following dependencies:
 git clone https://github.com/aayushsoni4/Movie-Recommendation-System.git
 cd Movie-Recommendation-System
 ```
-2. Unzip the `similarity.rar` file.
+2. Unzip the [similarity.rar](https://github.com/aayushsoni4/Movie-Recommendation-System/blob/main/similarity.rar) file.
 3. Activate the virtual environment:
 ```
 .\venv\Scripts\activate
