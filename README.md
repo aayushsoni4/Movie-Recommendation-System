@@ -52,7 +52,7 @@ pip install -r requirements.txt
 ```
 streamlit run app.py
 ```
-6. Access the web interface in your browser by visiting: `http://localhost:8501`
+6. Access the web interface in your browser by visiting: [`http://localhost:8501`](http://localhost:8501/)
 
 7. Input the name of the movie you like into the search box.
 
