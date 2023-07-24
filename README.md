@@ -17,7 +17,7 @@ The movie recommendation system works in the following steps:
 
 3. **Content-Based Filtering**: Content-based filtering recommends movies based on the characteristics and features of the selected movie. It suggests movies with similar genres, directors, or actors.
 
-4. **Recommendation Generation**: The system combines the results from collaborative filtering and content-based filtering to generate a list of the top 10 recommended movies for the user.
+4. **Recommendation Generation**: Using content-based filtering, the system calculates similarity between the selected movie and others based on their features like genre, overview, director, and actors. It then ranks the movies by similarity and generates a list of the top 10 recommended movies for the user.
 
 5. **User Interface**: The system provides a user-friendly interface where users can input the movie of their choice and receive personalized recommendations.
 
