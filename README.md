@@ -1,5 +1,5 @@
 # Movie Recommendation System
-This project is a movie recommendation system that utilizes machine learning techniques to suggest the top 10 similar movies based on a user-selected movie. The system employs collaborative filtering and content-based filtering methods to provide personalized movie recommendations to the users.
+This project is a movie recommendation system that utilizes machine learning techniques to suggest the top 10 similar movies based on a user-selected movie. The system employs content-based filtering methods to provide personalized movie recommendations to the users.
 
 
 ## Introduction
