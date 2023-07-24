@@ -44,7 +44,7 @@ cd Movie-Recommendation-System
 ```
 .\venv\Scripts\activate
 ```
-4. Install all the libraries mentioned in the `requirements.txt` file with the command 
+4. Install all the libraries mentioned in the [requirements.txt](https://github.com/aayushsoni4/Movie-Recommendation-System/blob/main/requirements.txt) file with the command 
 ```
 pip install -r requirements.txt
 ```
