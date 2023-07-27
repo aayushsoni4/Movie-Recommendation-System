@@ -1,5 +1,5 @@
 # Movie Recommendation System
-This project is a movie recommendation system that utilizes machine learning techniques to suggest the top 10 similar movies based on a user-selected movie. The system employs collaborative filtering and content-based filtering methods to provide personalized movie recommendations to the users.
+This project is a movie recommendation system that utilizes machine learning techniques to suggest the top 10 similar movies based on a user-selected movie. The system employs content-based filtering methods to provide personalized movie recommendations to the users.
 
 
 ## Introduction
@@ -17,7 +17,7 @@ The movie recommendation system works in the following steps:
 
 3. **Content-Based Filtering**: Content-based filtering recommends movies based on the characteristics and features of the selected movie. It suggests movies with similar genres, directors, or actors.
 
-4. **Recommendation Generation**: The system combines the results from collaborative filtering and content-based filtering to generate a list of the top 10 recommended movies for the user.
+4. **Recommendation Generation**: Using content-based filtering, the system calculates similarity between the selected movie and others based on their features like genre, overview, director, and actors. It then ranks the movies by similarity and generates a list of the top 10 recommended movies for the user.
 
 5. **User Interface**: The system provides a user-friendly interface where users can input the movie of their choice and receive personalized recommendations.
 
@@ -39,12 +39,12 @@ To run this project, you will need the following dependencies:
 git clone https://github.com/aayushsoni4/Movie-Recommendation-System.git
 cd Movie-Recommendation-System
 ```
-2. Unzip the `similarity.rar` file.
+2. Unzip the [similarity.rar](https://github.com/aayushsoni4/Movie-Recommendation-System/blob/main/similarity.rar) file.
 3. Activate the virtual environment:
 ```
 .\venv\Scripts\activate
 ```
-4. Install all the libraries mentioned in the `requirements.txt` file with the command 
+4. Install all the libraries mentioned in the [requirements.txt](https://github.com/aayushsoni4/Movie-Recommendation-System/blob/main/requirements.txt) file with the command 
 ```
 pip install -r requirements.txt
 ```
@@ -52,7 +52,7 @@ pip install -r requirements.txt
 ```
 streamlit run app.py
 ```
-6. Access the web interface in your browser by visiting: `http://localhost:8501`
+6. Access the web interface in your browser by visiting: [`http://localhost:8501`](http://localhost:8501/)
 
 7. Input the name of the movie you like into the search box.
 
