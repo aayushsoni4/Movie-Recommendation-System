@@ -39,21 +39,20 @@ To run this project, you will need the following dependencies:
 git clone https://github.com/aayushsoni4/Movie-Recommendation-System.git
 cd Movie-Recommendation-System
 ```
-2. Unzip the [similarity.rar](https://github.com/aayushsoni4/Movie-Recommendation-System/blob/main/similarity.rar) file.
-3. Activate the virtual environment:
+2. Activate the virtual environment:
 ```
 .\venv\Scripts\activate
 ```
-4. Install all the libraries mentioned in the [requirements.txt](https://github.com/aayushsoni4/Movie-Recommendation-System/blob/main/requirements.txt) file with the command 
+3. Install all the libraries mentioned in the [requirements.txt](https://github.com/aayushsoni4/Movie-Recommendation-System/blob/main/requirements.txt) file with the command 
 ```
 pip install -r requirements.txt
 ```
-5. Run the application:
+4. Run the application:
 ```
 streamlit run app.py
 ```
-6. Access the web interface in your browser by visiting: [`http://localhost:8501`](http://localhost:8501/)
+5. Access the web interface in your browser by visiting: [`http://localhost:8501`](http://localhost:8501/)
 
-7. Input the name of the movie you like into the search box.
+6. Input the name of the movie you like into the search box.
 
-8. Click the `Recommend` button to get the top 10 recommended movies.
+7. Click the `Recommend` button to get the top 10 recommended movies.
