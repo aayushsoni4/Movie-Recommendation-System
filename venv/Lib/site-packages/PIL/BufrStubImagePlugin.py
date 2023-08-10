@@ -33,15 +33,16 @@ def _accept(prefix):
 
 
 class BufrStubImageFile(ImageFile.StubImageFile):
+
     format = "BUFR"
     format_description = "BUFR"
 
     def _open(self):
+
         offset = self.fp.tell()
 
         if not _accept(self.fp.read(4)):
-            msg = "Not a BUFR file"
-            raise SyntaxError(msg)
+            raise SyntaxError("Not a BUFR file")
 
         self.fp.seek(offset)
 
@@ -58,9 +59,8 @@ class BufrStubImageFile(ImageFile.StubImageFile):
 
 
 def _save(im, fp, filename):
-    if _handler is None or not hasattr(_handler, "save"):
-        msg = "BUFR save handler not installed"
-        raise OSError(msg)
+    if _handler is None or not hasattr("_handler", "save"):
+        raise OSError("BUFR save handler not installed")
     _handler.save(im, fp, filename)
 
 

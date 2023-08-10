@@ -103,8 +103,10 @@ def validates(version):
 
 
 def _warn_for_remote_retrieve(uri: str):
-    from urllib.request import urlopen
-    with urlopen(uri) as response:
+    from urllib.request import Request, urlopen
+    headers = {"User-Agent": "python-jsonschema (deprecated $ref resolution)"}
+    request = Request(uri, headers=headers)
+    with urlopen(request) as response:
         warnings.warn(
             "Automatically retrieving remote references can be a security "
             "vulnerability and is discouraged by the JSON Schema "
@@ -117,7 +119,10 @@ def _warn_for_remote_retrieve(uri: str):
             DeprecationWarning,
             stacklevel=9,  # Ha ha ha ha magic numbers :/
         )
-        return referencing.Resource.from_contents(json.load(response))
+        return referencing.Resource.from_contents(
+            json.load(response),
+            default_specification=referencing.jsonschema.DRAFT202012,
+        )
 
 
 _REMOTE_WARNING_REGISTRY = SPECIFICATIONS.combine(
@@ -213,8 +218,8 @@ def create(
     @define
     class Validator:
 
-        VALIDATORS = dict(validators)
-        META_SCHEMA = dict(meta_schema)
+        VALIDATORS = dict(validators)  # noqa: RUF012
+        META_SCHEMA = dict(meta_schema)  # noqa: RUF012
         TYPE_CHECKER = type_checker
         FORMAT_CHECKER = format_checker_arg
         ID_OF = staticmethod(id_of)

@@ -19,7 +19,6 @@ _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'google.protobuf.source_context_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
-
   DESCRIPTOR._options = None
   DESCRIPTOR._serialized_options = b'\n\023com.google.protobufB\022SourceContextProtoP\001Z6google.golang.org/protobuf/types/known/sourcecontextpb\242\002\003GPB\252\002\036Google.Protobuf.WellKnownTypes'
   _globals['_SOURCECONTEXT']._serialized_start=57

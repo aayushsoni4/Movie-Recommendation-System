@@ -30,8 +30,7 @@ class Iterator:
 
     def __init__(self, im):
         if not hasattr(im, "seek"):
-            msg = "im must have seek method"
-            raise AttributeError(msg)
+            raise AttributeError("im must have seek method")
         self.im = im
         self.position = getattr(self.im, "_min_frame", 0)
 

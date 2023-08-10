@@ -170,24 +170,10 @@ class Draw:
             xy.transform(self.transform)
         self.draw.text(xy, text, font=font.font, fill=font.color)
 
-    def textbbox(self, xy, text, font):
+    def textsize(self, text, font):
         """
-        Returns bounding box (in pixels) of given text.
+        Return the size of the given string, in pixels.
 
-        :return: ``(left, top, right, bottom)`` bounding box
-
-        .. seealso:: :py:meth:`PIL.ImageDraw.ImageDraw.textbbox`
+        .. seealso:: :py:meth:`PIL.ImageDraw.ImageDraw.textsize`
         """
-        if self.transform:
-            xy = ImagePath.Path(xy)
-            xy.transform(self.transform)
-        return self.draw.textbbox(xy, text, font=font.font)
-
-    def textlength(self, text, font):
-        """
-        Returns length (in pixels) of given text.
-        This is the amount by which following text should be offset.
-
-        .. seealso:: :py:meth:`PIL.ImageDraw.ImageDraw.textlength`
-        """
-        return self.draw.textlength(text, font=font.font)
+        return self.draw.textsize(text, font=font.font)
