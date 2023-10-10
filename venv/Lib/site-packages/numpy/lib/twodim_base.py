@@ -155,10 +155,6 @@ def flipud(m):
     return m[::-1, ...]
 
 
-def _eye_dispatcher(N, M=None, k=None, dtype=None, order=None, *, like=None):
-    return (like,)
-
-
 @set_array_function_like_doc
 @set_module('numpy')
 def eye(N, M=None, k=0, dtype=float, order='C', *, like=None):
@@ -209,7 +205,7 @@ def eye(N, M=None, k=0, dtype=float, order='C', *, like=None):
 
     """
     if like is not None:
-        return _eye_with_like(N, M=M, k=k, dtype=dtype, order=order, like=like)
+        return _eye_with_like(like, N, M=M, k=k, dtype=dtype, order=order)
     if M is None:
         M = N
     m = zeros((N, M), dtype=dtype, order=order)
@@ -228,9 +224,7 @@ def eye(N, M=None, k=0, dtype=float, order='C', *, like=None):
     return m
 
 
-_eye_with_like = array_function_dispatch(
-    _eye_dispatcher
-)(eye)
+_eye_with_like = array_function_dispatch()(eye)
 
 
 def _diag_dispatcher(v, k=None):
@@ -369,10 +363,6 @@ def diagflat(v, k=0):
     return wrap(res)
 
 
-def _tri_dispatcher(N, M=None, k=None, dtype=None, *, like=None):
-    return (like,)
-
-
 @set_array_function_like_doc
 @set_module('numpy')
 def tri(N, M=None, k=0, dtype=float, *, like=None):
@@ -416,7 +406,7 @@ def tri(N, M=None, k=0, dtype=float, *, like=None):
 
     """
     if like is not None:
-        return _tri_with_like(N, M=M, k=k, dtype=dtype, like=like)
+        return _tri_with_like(like, N, M=M, k=k, dtype=dtype)
 
     if M is None:
         M = N
@@ -430,9 +420,7 @@ def tri(N, M=None, k=0, dtype=float, *, like=None):
     return m
 
 
-_tri_with_like = array_function_dispatch(
-    _tri_dispatcher
-)(tri)
+_tri_with_like = array_function_dispatch()(tri)
 
 
 def _trilu_dispatcher(m, k=None):
@@ -634,8 +622,8 @@ def vander(x, N=None, increasing=False):
     return v
 
 
-def _histogram2d_dispatcher(x, y, bins=None, range=None, normed=None,
-                            weights=None, density=None):
+def _histogram2d_dispatcher(x, y, bins=None, range=None, density=None,
+                            weights=None):
     yield x
     yield y
 
@@ -653,8 +641,7 @@ def _histogram2d_dispatcher(x, y, bins=None, range=None, normed=None,
 
 
 @array_function_dispatch(_histogram2d_dispatcher)
-def histogram2d(x, y, bins=10, range=None, normed=None, weights=None,
-                density=None):
+def histogram2d(x, y, bins=10, range=None, density=None, weights=None):
     """
     Compute the bi-dimensional histogram of two data samples.
 
@@ -688,13 +675,9 @@ def histogram2d(x, y, bins=10, range=None, normed=None, weights=None,
         If False, the default, returns the number of samples in each bin.
         If True, returns the probability *density* function at the bin,
         ``bin_count / sample_count / bin_area``.
-    normed : bool, optional
-        An alias for the density argument that behaves identically. To avoid
-        confusion with the broken normed argument to `histogram`, `density`
-        should be preferred.
     weights : array_like, shape(N,), optional
         An array of values ``w_i`` weighing each sample ``(x_i, y_i)``.
-        Weights are normalized to 1 if `normed` is True. If `normed` is
+        Weights are normalized to 1 if `density` is True. If `density` is
         False, the values of the returned histogram are equal to the sum of
         the weights belonging to the samples falling into each bin.
 
@@ -716,7 +699,7 @@ def histogram2d(x, y, bins=10, range=None, normed=None, weights=None,
 
     Notes
     -----
-    When `normed` is True, then the returned histogram is the sample
+    When `density` is True, then the returned histogram is the sample
     density, defined such that the sum over bins of the product
     ``bin_value * bin_area`` is 1.
 
@@ -771,7 +754,7 @@ def histogram2d(x, y, bins=10, range=None, normed=None, weights=None,
     >>> xcenters = (xedges[:-1] + xedges[1:]) / 2
     >>> ycenters = (yedges[:-1] + yedges[1:]) / 2
     >>> im.set_data(xcenters, ycenters, H)
-    >>> ax.images.append(im)
+    >>> ax.add_image(im)
     >>> plt.show()
 
     It is also possible to construct a 2-D histogram without specifying bin
@@ -822,7 +805,7 @@ def histogram2d(x, y, bins=10, range=None, normed=None, weights=None,
     if N != 1 and N != 2:
         xedges = yedges = asarray(bins)
         bins = [xedges, yedges]
-    hist, edges = histogramdd([x, y], bins, range, normed, weights, density)
+    hist, edges = histogramdd([x, y], bins, range, density, weights)
     return hist, edges[0], edges[1]
 
 
@@ -1000,9 +983,42 @@ def tril_indices_from(arr, k=0):
     k : int, optional
         Diagonal offset (see `tril` for details).
 
+    Examples
+    --------
+
+    Create a 4 by 4 array.
+
+    >>> a = np.arange(16).reshape(4, 4)
+    >>> a
+    array([[ 0,  1,  2,  3],
+           [ 4,  5,  6,  7],
+           [ 8,  9, 10, 11],
+           [12, 13, 14, 15]])
+
+    Pass the array to get the indices of the lower triangular elements.
+
+    >>> trili = np.tril_indices_from(a)
+    >>> trili
+    (array([0, 1, 1, 2, 2, 2, 3, 3, 3, 3]), array([0, 0, 1, 0, 1, 2, 0, 1, 2, 3]))
+
+    >>> a[trili]
+    array([ 0,  4,  5,  8,  9, 10, 12, 13, 14, 15])
+
+    This is syntactic sugar for tril_indices().
+
+    >>> np.tril_indices(a.shape[0])
+    (array([0, 1, 1, 2, 2, 2, 3, 3, 3, 3]), array([0, 0, 1, 0, 1, 2, 0, 1, 2, 3]))
+
+    Use the `k` parameter to return the indices for the lower triangular array
+    up to the k-th diagonal.
+
+    >>> trili1 = np.tril_indices_from(a, k=1)
+    >>> a[trili1]
+    array([ 0,  1,  4,  5,  6,  8,  9, 10, 11, 12, 13, 14, 15])
+
     See Also
     --------
-    tril_indices, tril
+    tril_indices, tril, triu_indices_from
 
     Notes
     -----
@@ -1119,9 +1135,43 @@ def triu_indices_from(arr, k=0):
     triu_indices_from : tuple, shape(2) of ndarray, shape(N)
         Indices for the upper-triangle of `arr`.
 
+    Examples
+    --------
+
+    Create a 4 by 4 array.
+
+    >>> a = np.arange(16).reshape(4, 4)
+    >>> a
+    array([[ 0,  1,  2,  3],
+           [ 4,  5,  6,  7],
+           [ 8,  9, 10, 11],
+           [12, 13, 14, 15]])
+
+    Pass the array to get the indices of the upper triangular elements.
+
+    >>> triui = np.triu_indices_from(a)
+    >>> triui
+    (array([0, 0, 0, 0, 1, 1, 1, 2, 2, 3]), array([0, 1, 2, 3, 1, 2, 3, 2, 3, 3]))
+
+    >>> a[triui]
+    array([ 0,  1,  2,  3,  5,  6,  7, 10, 11, 15])
+
+    This is syntactic sugar for triu_indices().
+
+    >>> np.triu_indices(a.shape[0])
+    (array([0, 0, 0, 0, 1, 1, 1, 2, 2, 3]), array([0, 1, 2, 3, 1, 2, 3, 2, 3, 3]))
+
+    Use the `k` parameter to return the indices for the upper triangular array
+    from the k-th diagonal.
+
+    >>> triuim1 = np.triu_indices_from(a, k=1)
+    >>> a[triuim1]
+    array([ 1,  2,  3,  6,  7, 11])
+
+
     See Also
     --------
-    triu_indices, triu
+    triu_indices, triu, tril_indices_from
 
     Notes
     -----

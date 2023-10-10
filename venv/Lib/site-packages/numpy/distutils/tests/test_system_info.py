@@ -130,7 +130,7 @@ class DuplicateOptionInfo(_system_info):
 
 class TestSystemInfoReading:
 
-    def setup(self):
+    def setup_method(self):
         """ Create the libraries """
         # Create 2 sources and 2 libraries
         self._dir1 = mkdtemp()
@@ -171,8 +171,7 @@ class TestSystemInfoReading:
         self.c_dup_options = site_and_parse(get_class('duplicate_options'),
                                             self._sitecfg)
 
-
-    def teardown(self):
+    def teardown_method(self):
         # Do each removal separately
         try:
             shutil.rmtree(self._dir1)
@@ -272,7 +271,7 @@ class TestSystemInfoReading:
 
             # But if we copy the values to a '[mkl]' section the value
             # is correct
-            with open(cfg, 'r') as fid:
+            with open(cfg) as fid:
                 mkl = fid.read().replace('[ALL]', '[mkl]', 1)
             with open(cfg, 'w') as fid:
                 fid.write(mkl)
@@ -280,7 +279,7 @@ class TestSystemInfoReading:
             assert info.get_lib_dirs() == lib_dirs
 
             # Also, the values will be taken from a section named '[DEFAULT]'
-            with open(cfg, 'r') as fid:
+            with open(cfg) as fid:
                 dflt = fid.read().replace('[mkl]', '[DEFAULT]', 1)
             with open(cfg, 'w') as fid:
                 fid.write(dflt)

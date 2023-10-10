@@ -4,7 +4,7 @@ This project is a movie recommendation system that utilizes machine learning tec
 
 ## Introduction
 
-In the vast world of movies, it can be challenging for users to discover films that match their interests. This movie recommendation system aims to alleviate that problem by suggesting similar movies to the ones users already like. The system uses collaborative filtering techniques to identify movies similar to the user's preferences and content-based filtering to recommend movies based on specific features of the movies.
+In the vast world of movies, it can be challenging for users to discover films that match their interests. This movie recommendation system aims to alleviate that problem by suggesting similar movies to the ones users already like. The system uses content-based filtering to recommend movies based on specific features of the movies.
 
 ## How it Works
 
