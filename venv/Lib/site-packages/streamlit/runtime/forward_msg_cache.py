@@ -20,6 +20,7 @@ from streamlit import config, util
 from streamlit.logger import get_logger
 from streamlit.proto.ForwardMsg_pb2 import ForwardMsg
 from streamlit.runtime.stats import CacheStat, CacheStatsProvider
+from streamlit.util import HASHLIB_KWARGS
 
 if TYPE_CHECKING:
     from streamlit.runtime.app_session import AppSession
@@ -51,7 +52,7 @@ def populate_hash_if_needed(msg: ForwardMsg) -> str:
         msg.ClearField("metadata")
 
         # MD5 is good enough for what we need, which is uniqueness.
-        hasher = hashlib.md5()
+        hasher = hashlib.md5(**HASHLIB_KWARGS)
         hasher.update(msg.SerializeToString())
         msg.hash = hasher.hexdigest()
 
@@ -192,7 +193,7 @@ class ForwardMsgCache(CacheStatsProvider):
 
         Parameters
         ----------
-        hash : string
+        hash : str
             The id of the message to retrieve.
 
         Returns

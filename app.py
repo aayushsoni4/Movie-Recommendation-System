@@ -45,7 +45,7 @@ if st.button('Recommend'):
     movie_idx = movies[movies['title']==selected_movie].index[0]
     st.header(selected_movie)
         
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns([2.1,2])
     with col1:
         poster = fetch_poster(movies.iloc[movie_idx].id)
         st.image(poster, width=350)
@@ -68,8 +68,7 @@ if st.button('Recommend'):
         
         query = selected_movie+" "+str(data['release_date'][:4])+" official trailer"
         video_url = trailer_finder.findYTtrailer(query)
-        link = f'[Trailer]({video_url})'
-        st.markdown(link, unsafe_allow_html=True)
+        st.link_button("Trailer", video_url)
 
 
 
@@ -80,7 +79,7 @@ if st.button('Recommend'):
     with tab1:
         st.header(recommended_movies[0])
         
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns([2.1,2])
         with col1:
             st.image(posters[0], width=350)
         with col2:
@@ -103,13 +102,13 @@ if st.button('Recommend'):
             
             query = recommended_movies[0]+" "+str(data['release_date'][:4])+" official trailer"
             video_url = trailer_finder.findYTtrailer(query)
-            link = f'[Trailer]({video_url})'
-            st.markdown(link, unsafe_allow_html=True)
+            st.link_button("Trailer", video_url)
+            
 
     with tab2:
         st.header(recommended_movies[1])
         
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns([2.1,2])
         with col1:
             st.image(posters[1], width=350)
         with col2:
@@ -131,13 +130,13 @@ if st.button('Recommend'):
             
             query = recommended_movies[1]+" "+str(data['release_date'][:4])+" official trailer"
             video_url = trailer_finder.findYTtrailer(query)
-            link = f'[Trailer]({video_url})'
-            st.markdown(link, unsafe_allow_html=True)    
+            st.link_button("Trailer", video_url)
+
 
     with tab3:
         st.header(recommended_movies[2])
         
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns([2.1,2])
         with col1:
             st.image(posters[2], width=350)
         with col2:
@@ -159,13 +158,12 @@ if st.button('Recommend'):
             
             query = recommended_movies[2]+" "+str(data['release_date'][:4])+" official trailer"
             video_url = trailer_finder.findYTtrailer(query)
-            link = f'[Trailer]({video_url})'
-            st.markdown(link, unsafe_allow_html=True)        
+            st.link_button("Trailer", video_url)
     
     with tab4:
         st.header(recommended_movies[3])
         
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns([2.1,2])
         with col1:
             st.image(posters[3], width=350)
         with col2:
@@ -187,13 +185,13 @@ if st.button('Recommend'):
             
             query = recommended_movies[3]+" "+str(data['release_date'][:4])+" official trailer"
             video_url = trailer_finder.findYTtrailer(query)
-            link = f'[Trailer]({video_url})'
-            st.markdown(link, unsafe_allow_html=True)          
+            st.link_button("Trailer", video_url)
+   
 
     with tab5:
         st.header(recommended_movies[4])
         
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns([2.1,2])
         with col1:
             st.image(posters[4], width=350)
         with col2:
@@ -215,13 +213,12 @@ if st.button('Recommend'):
             
             query = recommended_movies[4]+" "+str(data['release_date'][:4])+" official trailer"
             video_url = trailer_finder.findYTtrailer(query)
-            link = f'[Trailer]({video_url})'
-            st.markdown(link, unsafe_allow_html=True)         
+            st.link_button("Trailer", video_url)
     
     with tab6:
         st.header(recommended_movies[5])
         
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns([2.1,2])
         with col1:
             st.image(posters[5], width=350)
         with col2:
@@ -243,13 +240,12 @@ if st.button('Recommend'):
             
             query = recommended_movies[5]+" "+str(data['release_date'][:4])+" official trailer"
             video_url = trailer_finder.findYTtrailer(query)
-            link = f'[Trailer]({video_url})'
-            st.markdown(link, unsafe_allow_html=True)      
+            st.link_button("Trailer", video_url)
 
     with tab7:
         st.header(recommended_movies[6])
         
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns([2.1,2])
         with col1:
             st.image(posters[6], width=350)
         with col2:
@@ -271,13 +267,12 @@ if st.button('Recommend'):
             
             query = recommended_movies[6]+" "+str(data['release_date'][:4])+" official trailer"
             video_url = trailer_finder.findYTtrailer(query)
-            link = f'[Trailer]({video_url})'
-            st.markdown(link, unsafe_allow_html=True)   
+            st.link_button("Trailer", video_url)   
 
     with tab8:
         st.header(recommended_movies[7])
         
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns([2.1,2])
         with col1:
             st.image(posters[7], width=350)
         with col2:
@@ -299,13 +294,13 @@ if st.button('Recommend'):
             
             query = recommended_movies[7]+" "+str(data['release_date'][:4])+" official trailer"
             video_url = trailer_finder.findYTtrailer(query)
-            link = f'[Trailer]({video_url})'
-            st.markdown(link, unsafe_allow_html=True)  
+            st.link_button("Trailer", video_url)   
+
     
     with tab9:
         st.header(recommended_movies[8])
         
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns([2.1,2])
         with col1:
             st.image(posters[8], width=350)
         with col2:
@@ -327,13 +322,12 @@ if st.button('Recommend'):
             
             query = recommended_movies[8]+" "+str(data['release_date'][:4])+" official trailer"
             video_url = trailer_finder.findYTtrailer(query)
-            link = f'[Trailer]({video_url})'
-            st.markdown(link, unsafe_allow_html=True) 
+            st.link_button("Trailer", video_url)   
 
     with tab10:
         st.header(recommended_movies[9])
         
-        col1, col2 = st.columns(2)
+        col1, col2 = st.columns([2.1,2])
         with col1:
             st.image(posters[9], width=350)
         with col2:
@@ -355,5 +349,4 @@ if st.button('Recommend'):
             
             query = recommended_movies[9]+" "+str(data['release_date'][:4])+" official trailer"
             video_url = trailer_finder.findYTtrailer(query)
-            link = f'[Trailer]({video_url})'
-            st.markdown(link, unsafe_allow_html=True)
+            st.link_button("Trailer", video_url)   
