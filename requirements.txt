@@ -1,3 +1,5 @@
 numpy
 pandas
 streamlit
+bs4
+webbrowser
