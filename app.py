@@ -3,6 +3,7 @@ import pickle
 import pandas as pd
 import requests
 import numpy as np
+import trailer_finder
 
 def fetch_poster(movie_id):
     response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=087c4d46a2f438619a5f3c6714775216&language=en-US'.format(movie_id))
@@ -63,7 +64,12 @@ if st.button('Recommend'):
             s+=i['english_name']+", "
         st.write("***LANGUAGES***: ", s[:-2])
         st.write("***RATING***: ", data['vote_average'], "/10")
-        st.write("***STATUS***: ", data['status'])            
+        st.write("***STATUS***: ", data['status'])     
+        
+        query = selected_movie+" "+str(data['release_date'][:4])+" official trailer"
+        video_url = trailer_finder.findYTtrailer(query)
+        link = f'[Trailer]({video_url})'
+        st.markdown(link, unsafe_allow_html=True)
 
 
 
@@ -92,7 +98,13 @@ if st.button('Recommend'):
                 s+=i['english_name']+", "
             st.write("***LANGUAGES***: ", s[:-2])
             st.write("***RATING***: ", data['vote_average'], "/10")
-            st.write("***STATUS***: ", data['status'])            
+            st.write("***STATUS***: ", data['status'])
+            
+            
+            query = recommended_movies[0]+" "+str(data['release_date'][:4])+" official trailer"
+            video_url = trailer_finder.findYTtrailer(query)
+            link = f'[Trailer]({video_url})'
+            st.markdown(link, unsafe_allow_html=True)
 
     with tab2:
         st.header(recommended_movies[1])
@@ -115,7 +127,12 @@ if st.button('Recommend'):
                 s+=i['english_name']+", "
             st.write("***LANGUAGES***: ", s[:-2])
             st.write("***RATING***: ", data['vote_average'], "/10")
-            st.write("***STATUS***: ", data['status'])            
+            st.write("***STATUS***: ", data['status'])        
+            
+            query = recommended_movies[1]+" "+str(data['release_date'][:4])+" official trailer"
+            video_url = trailer_finder.findYTtrailer(query)
+            link = f'[Trailer]({video_url})'
+            st.markdown(link, unsafe_allow_html=True)    
 
     with tab3:
         st.header(recommended_movies[2])
@@ -138,7 +155,12 @@ if st.button('Recommend'):
                 s+=i['english_name']+", "
             st.write("***LANGUAGES***: ", s[:-2])
             st.write("***RATING***: ", data['vote_average'], "/10")
-            st.write("***STATUS***: ", data['status'])            
+            st.write("***STATUS***: ", data['status'])    
+            
+            query = recommended_movies[2]+" "+str(data['release_date'][:4])+" official trailer"
+            video_url = trailer_finder.findYTtrailer(query)
+            link = f'[Trailer]({video_url})'
+            st.markdown(link, unsafe_allow_html=True)        
     
     with tab4:
         st.header(recommended_movies[3])
@@ -161,7 +183,12 @@ if st.button('Recommend'):
                 s+=i['english_name']+", "
             st.write("***LANGUAGES***: ", s[:-2])
             st.write("***RATING***: ", data['vote_average'], "/10")
-            st.write("***STATUS***: ", data['status'])            
+            st.write("***STATUS***: ", data['status'])  
+            
+            query = recommended_movies[3]+" "+str(data['release_date'][:4])+" official trailer"
+            video_url = trailer_finder.findYTtrailer(query)
+            link = f'[Trailer]({video_url})'
+            st.markdown(link, unsafe_allow_html=True)          
 
     with tab5:
         st.header(recommended_movies[4])
@@ -184,7 +211,12 @@ if st.button('Recommend'):
                 s+=i['english_name']+", "
             st.write("***LANGUAGES***: ", s[:-2])
             st.write("***RATING***: ", data['vote_average'], "/10")
-            st.write("***STATUS***: ", data['status'])                
+            st.write("***STATUS***: ", data['status'])       
+            
+            query = recommended_movies[4]+" "+str(data['release_date'][:4])+" official trailer"
+            video_url = trailer_finder.findYTtrailer(query)
+            link = f'[Trailer]({video_url})'
+            st.markdown(link, unsafe_allow_html=True)         
     
     with tab6:
         st.header(recommended_movies[5])
@@ -207,7 +239,12 @@ if st.button('Recommend'):
                 s+=i['english_name']+", "
             st.write("***LANGUAGES***: ", s[:-2])
             st.write("***RATING***: ", data['vote_average'], "/10")
-            st.write("***STATUS***: ", data['status'])            
+            st.write("***STATUS***: ", data['status'])      
+            
+            query = recommended_movies[5]+" "+str(data['release_date'][:4])+" official trailer"
+            video_url = trailer_finder.findYTtrailer(query)
+            link = f'[Trailer]({video_url})'
+            st.markdown(link, unsafe_allow_html=True)      
 
     with tab7:
         st.header(recommended_movies[6])
@@ -230,7 +267,12 @@ if st.button('Recommend'):
                 s+=i['english_name']+", "
             st.write("***LANGUAGES***: ", s[:-2])
             st.write("***RATING***: ", data['vote_average'], "/10")
-            st.write("***STATUS***: ", data['status'])            
+            st.write("***STATUS***: ", data['status'])         
+            
+            query = recommended_movies[6]+" "+str(data['release_date'][:4])+" official trailer"
+            video_url = trailer_finder.findYTtrailer(query)
+            link = f'[Trailer]({video_url})'
+            st.markdown(link, unsafe_allow_html=True)   
 
     with tab8:
         st.header(recommended_movies[7])
@@ -253,7 +295,12 @@ if st.button('Recommend'):
                 s+=i['english_name']+", "
             st.write("***LANGUAGES***: ", s[:-2])
             st.write("***RATING***: ", data['vote_average'], "/10")
-            st.write("***STATUS***: ", data['status'])            
+            st.write("***STATUS***: ", data['status'])          
+            
+            query = recommended_movies[7]+" "+str(data['release_date'][:4])+" official trailer"
+            video_url = trailer_finder.findYTtrailer(query)
+            link = f'[Trailer]({video_url})'
+            st.markdown(link, unsafe_allow_html=True)  
     
     with tab9:
         st.header(recommended_movies[8])
@@ -276,7 +323,12 @@ if st.button('Recommend'):
                 s+=i['english_name']+", "
             st.write("***LANGUAGES***: ", s[:-2])
             st.write("***RATING***: ", data['vote_average'], "/10")
-            st.write("***STATUS***: ", data['status'])            
+            st.write("***STATUS***: ", data['status'])           
+            
+            query = recommended_movies[8]+" "+str(data['release_date'][:4])+" official trailer"
+            video_url = trailer_finder.findYTtrailer(query)
+            link = f'[Trailer]({video_url})'
+            st.markdown(link, unsafe_allow_html=True) 
 
     with tab10:
         st.header(recommended_movies[9])
@@ -300,3 +352,8 @@ if st.button('Recommend'):
             st.write("***LANGUAGES***: ", s[:-2])
             st.write("***RATING***: ", data['vote_average'], "/10")
             st.write("***STATUS***: ", data['status'])                
+            
+            query = recommended_movies[9]+" "+str(data['release_date'][:4])+" official trailer"
+            video_url = trailer_finder.findYTtrailer(query)
+            link = f'[Trailer]({video_url})'
+            st.markdown(link, unsafe_allow_html=True)
