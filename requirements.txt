@@ -2,3 +2,5 @@ numpy
 pandas
 streamlit
 bs4
+google-api-python-client
+python-dotenv
