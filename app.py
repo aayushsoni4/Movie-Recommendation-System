@@ -1,6 +1,7 @@
 import recommend
 import pandas as pd
 import streamlit as st
+import os
 import requests
 import display
 
@@ -55,11 +56,17 @@ def movie_content(movie_detail):
     with col2:
         temp.display_movie()
 
+root_dir = os.getcwd()
+models_dir = os.path.join(root_dir, 'models')
+dataset_dir = os.path.join(root_dir, 'dataset')
+movie_title_id_path = os.path.join(dataset_dir, 'movie_title_id.csv')
+features_similarity_path = os.path.join(models_dir, 'features_similarity.csv')
+items_similarity_path = os.path.join(models_dir, 'items_similarity.csv')
 
-movies = pd.read_csv(r'dataset\movie_title_id.csv')
+movies = pd.read_csv(movie_title_id_path)
 
-features_similarity = pd.read_csv(r'models\features_similarity.csv')
-items_similarity = pd.read_csv(r'models\items_similarity.csv')
+features_similarity = pd.read_csv(features_similarity_path)
+items_similarity = pd.read_csv(items_similarity_path)
 
 features_similarity.set_index('Unnamed: 0',inplace=True)
 items_similarity.set_index('Unnamed: 0',inplace=True)
