@@ -1,3 +1,4 @@
+import googleapiclient
 import streamlit as st
 import requests
 import trailer_finder
@@ -29,5 +30,13 @@ class Display:
         st.write("***STATUS***: ", data['status'])        
         
         query = self.recommended_movie+" "+str(data['release_date'][:4])+" official trailer"
-        video_url = trailer_finder.findYTtrailer(query)
-        st.link_button("Trailer", video_url)
+        try:
+            video_url = trailer_finder.findYTtrailer(query)
+        except (googleapiclient.errors.HttpError, Exception) as e:
+            try:
+                video_url = trailer_finder.findYTtrailerbs4(query)
+            except Exception as e:
+                video_url = None
+        if video_url:
+            st.link_button("Trailer", video_url)
+
