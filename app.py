@@ -56,10 +56,10 @@ def movie_content(movie_detail):
         temp.display_movie()
 
 
-movies = pd.read_csv(r'D:\Padhai\Projects\Completed Projects\Movie Recommendation System\dataset\movie_title_id.csv')
+movies = pd.read_csv(r'dataset\movie_title_id.csv')
 
-features_similarity = pd.read_csv(r'D:\Padhai\Projects\Completed Projects\Movie Recommendation System\models\features_similarity.csv')
-items_similarity = pd.read_csv(r'D:\Padhai\Projects\Completed Projects\Movie Recommendation System\models\items_similarity.csv')
+features_similarity = pd.read_csv(r'models\features_similarity.csv')
+items_similarity = pd.read_csv(r'models\items_similarity.csv')
 
 features_similarity.set_index('Unnamed: 0',inplace=True)
 items_similarity.set_index('Unnamed: 0',inplace=True)
