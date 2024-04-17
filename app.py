@@ -2,11 +2,15 @@ import recommend
 import pandas as pd
 import streamlit as st
 import os
+from dotenv import load_dotenv
 import requests
 import display
 
+load_dotenv()
+
 def fetch_poster(movie_id):
-    response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=087c4d46a2f438619a5f3c6714775216&language=en-US'.format(movie_id))
+    TMDB_API = os.environ['TMDB_API_KEY']
+    response = requests.get(f'https://api.themoviedb.org/3/movie/{movie_id}?api_key={TMDB_API}&language=en-US')
     data = response.json()
     return 'http://image.tmdb.org/t/p/w500' + data['poster_path']
 

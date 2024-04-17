@@ -2,6 +2,10 @@ import googleapiclient
 import streamlit as st
 import requests
 import trailer_finder
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 class Display:
     def __init__(self,recommended_movie, movie_id, poster):
@@ -13,7 +17,8 @@ class Display:
         st.image(self.poster, width=350)
     
     def display_movie(self):
-        response = requests.get('https://api.themoviedb.org/3/movie/{}?api_key=087c4d46a2f438619a5f3c6714775216&language=en-US'.format(self.movie_id))
+        TMDB_API = os.environ['TMDB_API_KEY']
+        response = requests.get(f'https://api.themoviedb.org/3/movie/{self.movie_id}?api_key={TMDB_API}&language=en-US')
         data = response.json()
         s = ""
         st.write("***OVERVIEW***: ", data['overview'])
